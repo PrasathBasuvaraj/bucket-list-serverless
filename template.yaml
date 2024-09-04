@@ -3,7 +3,7 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   bucket-list-api
 
-  Sample SAM Template for bucket-list-api
+  API Provides endpoint for managing bucket list
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -18,31 +18,31 @@ Globals:
   Api:
     TracingEnabled: true
 Resources:
-  HelloWorldFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  BucketListFunction:
+    Type: AWS::Serverless::Function
     Properties:
-      CodeUri: hello_world/
+      CodeUri: bucket_list/
       Handler: app.lambda_handler
       Runtime: python3.9
       Architectures:
       - x86_64
       Events:
-        HelloWorld:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+        BucketList:
+          Type: Api
           Properties:
-            Path: /hello
-            Method: get
+            Path: /bucket/list
+            Method: ANY
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  HelloWorldApi:
-    Description: API Gateway endpoint URL for Prod stage for Hello World function
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-  HelloWorldFunction:
-    Description: Hello World Lambda Function ARN
-    Value: !GetAtt HelloWorldFunction.Arn
-  HelloWorldFunctionIamRole:
-    Description: Implicit IAM Role created for Hello World function
-    Value: !GetAtt HelloWorldFunctionRole.Arn
+  BucketListApi:
+    Description: API Gateway endpoint URL for Prod stage for Bucket List function
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/bucket/list"
+  BucketListFunction:
+    Description: Bucket List Lambda Function ARN
+    Value: !GetAtt BucketListFunction.Arn
+  BucketListFunctionIamRole:
+    Description: Implicit IAM Role created for Bucket List function
+    Value: !GetAtt BucketListFunctionRole.Arn
