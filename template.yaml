@@ -28,7 +28,7 @@ Resources:
       - x86_64
       Events:
         BucketList:
-          Type: Api
+          Type: HttpApi
           Properties:
             Path: /bucket/list
             Method: ANY
